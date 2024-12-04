@@ -74,7 +74,12 @@ const QuestionScreen = ({ onNext }: Props) => {
 
       recognition.onresult = (event: SpeechRecognitionEvent) => {
         console.log("User's response:", event.results[0][0].transcript);
-        handleNextQuestion();
+        if (currentQuestionIndex < questions.length - 1) {
+          setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+          settimer(60);
+        } else {
+          onNext();
+        }
       };
 
       recognition.onend = () => {
@@ -87,16 +92,8 @@ const QuestionScreen = ({ onNext }: Props) => {
     } else {
       console.warn("SpeechRecognition not supported in this browser.");
     }
-  }, [currentQuestionIndex, currentAudio]);
-
-  const handleNextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      settimer(60);
-    } else {
-      onNext();
-    }
-  };
+  }, [currentQuestionIndex, currentAudio ]);
+;
 
   // useEffect for the timer of completion of the question
   useEffect(() => {
@@ -106,7 +103,12 @@ const QuestionScreen = ({ onNext }: Props) => {
       }, 1000);
       return () => clearTimeout(timerId);
     } else {
-      handleNextQuestion();
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+        settimer(60);
+      } else {
+        onNext();
+      }
     }
   }, [timer]);
 
