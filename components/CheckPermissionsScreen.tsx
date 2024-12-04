@@ -5,14 +5,13 @@ import { Button } from "./ui/button";
 
 interface Props {
   onNext: () => void;
-  step: number
 }
 
 const back = () => {
   
 };
 
-const CheckPermissionsScreen = ({ onNext, step }: Props) => {
+const CheckPermissionsScreen = ({ onNext }: Props) => {
   const [cameraGranted, setCameraGranted] = useState(false);
   const [micGranted, setMicGranted] = useState(false);
   const [screenGranted, setScreenGranted] = useState(false);

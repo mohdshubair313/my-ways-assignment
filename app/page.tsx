@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       {step === 0 && <InstructionsScreen onNext={nextStep} />}
-      {step === 1 && <CheckPermissionsScreen step={step} onNext={nextStep} />}
+      {step === 1 && <CheckPermissionsScreen onNext={nextStep} />}
       {step === 2 && <QuestionScreen onNext={nextStep} />}
       {step === 3 && <CompletionScreen />}
     </>
